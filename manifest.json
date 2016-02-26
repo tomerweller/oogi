@@ -1,0 +1,31 @@
+{
+    "name": "oogi",
+    "version": "0.1",
+    "manifest_version": 2,
+    "description": "Chrome Cookie Interceptor",
+    "homepage_url": "http://www.github.com/tomerweller/oofnik",
+    "background": {
+        "scripts": [
+            "common.js",
+            "background.js"
+        ],
+        "persistent": true
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://*/*"],
+            "js": ["content.js"],
+            "run_at": "document_start"
+        }
+    ],
+    "web_accessible_resources": [
+        "inject.js",
+        "common.js"
+    ],
+    "permissions": [
+        "contentSettings",
+        "webRequest",
+        "webRequestBlocking",
+        "*://*/*"
+    ]
+}
