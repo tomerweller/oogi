@@ -8,16 +8,9 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
         return {
             requestHeaders: details.requestHeaders
         };
-    },
-    {
-        urls: [
-            "*://*/*"
-        ]
-    },
-    [
-        'blocking',
-        'requestHeaders'
-    ]
+    }, {
+        urls: [ "*://*/*" ]
+    }, ['blocking', 'requestHeaders']
 );
 
 chrome.webRequest.onHeadersReceived.addListener(
@@ -27,18 +20,10 @@ chrome.webRequest.onHeadersReceived.addListener(
                 responseHeader.value = processSetCookieStr(responseHeader.value);
             }
         });
-
         return {
             responseHeaders: details.responseHeaders
         };
-    },
-    {
-        urls: [
-            "*://*/*"
-        ]
-    },
-    [
-        'blocking',
-        'responseHeaders'
-    ]
+    }, {
+        urls: ["*://*/*"]
+    }, ['blocking','responseHeaders']
 );
