@@ -1,11 +1,10 @@
 chrome.webRequest.onBeforeSendHeaders.addListener(
     function (details) {
-        for(var i=0; i<details.requestHeaders.length; i++) {
-            if (details.requestHeaders[i].name.toLowerCase() === "cookie") {
-                var cookiesStr = details.requestHeaders[i].value;
-                details.requestHeaders[i].value = processCookieStr(cookiesStr);
+        details.requestHeaders.forEach(function(requestHeader){
+            if (requestHeader.name.toLowerCase() === "cookie") {
+                requestHeader.value = processCookieStr(requestHeader.value);
             }
-        }
+        });
         return {
             requestHeaders: details.requestHeaders
         };
@@ -23,12 +22,12 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
 chrome.webRequest.onHeadersReceived.addListener(
     function (details) {
-        for(var i=0; i<details.responseHeaders.length; i++) {
-            if (details.responseHeaders[i].name.toLowerCase() === "set-cookie") {
-                var setCookiesStr = details.responseHeaders[i].value;
-                details.responseHeaders[i].value = processSetCookieStr(setCookiesStr);
+        details.responseHeaders.forEach(function(responseHeader){
+            if (responseHeader.name.toLowerCase() === "set-cookie") {
+                responseHeader.value = processSetCookieStr(responseHeader.value);
             }
-        }
+        });
+
         return {
             responseHeaders: details.responseHeaders
         };
