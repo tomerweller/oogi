@@ -15,5 +15,6 @@ var processCookieStr = function(cookiesStr) {
 };
 
 var processSetCookieStr = function(str) {
+    console.log("Processing set cookie string " + str);
     return getPrefix()+str;
 };
